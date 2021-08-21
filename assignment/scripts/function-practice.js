@@ -83,7 +83,7 @@ let testValue3 = 'turtle';
 let animals = ['dog', 'cat', 'turtle', 'horse'];
 let foundItem = false;
 
-console.log( animals );
+console.log( 'The animals in the array are:', animals.join(', ') + '.' );
 
 function findFunction( value, array ){
   for(let i=0; i<array.length; i++){
@@ -108,6 +108,7 @@ console.log('Is', testValue3, 'in the animals array?', findFunction( testValue3,
 // ----------------------
 // Stretch Goals
 // ----------------------
+
 // 8. Function to check if a letter is the first letter in a 
 //    string. Return true if it is, and false otherwise
 let testLetter1 = "T"
@@ -123,19 +124,117 @@ function isFirstLetter(letter, string) {
 } // end isFirstLetter function
 console.log( 'Is', testLetter1, 'the first letter of this string?', '\"', testString, '\":', isFirstLetter(testLetter1, testString) );
 console.log( 'Is', testLetter2, 'the first letter of this string?', '\"', testString, '\":', isFirstLetter(testLetter2, testString) );
+
+
 // 9. Function to return the sum of all numbers in an array
-function sumAll( ) {
-  let sum = 0
+let sum = 0;
+let numbersArray1 = [6,7,8,9,10,11,12,13];
+let numbersArray2 = [14,15,16,17,18,19,20]
+
+function sumAll(array ) {
   // TODO: loop to add items
+  for(let i=0; i<array.length; i++){
+    sum += array[i];
+  } // end for loop
   return sum;
-}
+} // end sumAll function
+
+console.log( 'The values of this array (', numbersArray1.toString(), ') sum to the value of:', sumAll(numbersArray1));
+console.log( 'The values of this array (', numbersArray2.toString(), ') sum to the value of:', sumAll(numbersArray2));
 
 // 10. Function to return a new array of all positive (greater than zero)
 //     numbers contained in an input array. If there are no positive numbers
 //     return an empty array. Note: The input array should not change.
 
+let mixNumberArray = [-5, 5,-8,8,10,-10,13,-13];
+let positiveNumberArray = [];
 
+function numberMover( initArray, destArray ){
+ for( let i=0; i<initArray.length; i++){
+    if(initArray[i] > 0){
+      destArray.push(initArray[i]);
+    }
+ } // end for loop
+console.log(
+  'The initial arry has',
+  initArray.length, 'numbers. (' +
+  initArray.join(', ') + ').', 
+  destArray.length, 'are positive. They are: (' +
+  destArray.join(', ') + ').'
+) // end console.log
+} // end numberMover function
+
+// run numberMover function:
+numberMover( mixNumberArray, positiveNumberArray);
 
 // 11. Pick a problem from Edabit(https://edabit.com/) or 
 //     CodeWars(https://www.codewars.com/). Then describe it 
 //     here in a comment, write the function, and test it!
+//Problem on online challenge:
+// Write a JavaScript function to convert an amount to coins. Go to the editor
+// Sample function : amountTocoins(46, [25, 10, 5, 2, 1])
+// Here 46 is the amount. and 25, 10, 5, 2, 1 are coins. 
+// Output : 25, 10, 10, 1
+
+let changeNeeded = 2; // prompt('how much change is needed? \(ex. 1.89 or 0.75\)');
+let remainingChange = changeNeeded;
+let coinValuesToUse = [1,.25,.10,.05,.01];
+let coinsToUse = ['Dollar', 'Quarter', 'Dime', 'Nickle', 'Penny' ];
+let coinsNeeded = [];
+let dollar = 0;
+let quarter = 0;
+let dime = 0;
+let nickle = 0;
+let penny = 0;
+
+function changeProvider (change, coins){
+  // while (change > 5){
+  //   alert( 'This function only supports change values less than $5.00 Please try again.');
+  //   changeNeeded = prompt('how much change is needed? \(ex. 1.89 or 0.75\)');
+  // }
+  while( remainingChange > 0 ){
+    if( remainingChange >= 1 ){
+      remainingChange -= coins[0];
+      coinsNeeded.push(coinsToUse[0]);
+    } // end if
+    // else if( remainingChange < 1 && remainingChange >= .25 ){
+    //   remainingChange -= coins[1];
+    //   coinsNeeded.push(coinsToUse[1]);
+    // } // end else if
+    else if( remainingChange < .25 && remainingChange >= .1 ){
+      remainingChange -= coins[2];
+      coinsNeeded.push(coinsToUse[2]);
+    } // end else if
+    // else if( remainingChange < .1 && remainingChange >= .05 ){
+    //   remainingChange -= coins[3];
+    //   coinsNeeded.push(coinsToUse[3]);
+    // } // end else if
+    // else {
+    //   remainingChange -= coins[4];
+    //   coinsNeeded.push(coinsToUse[4]);
+    // } // end else
+  } // end while loop
+  for( let i=0; i<coinsNeeded.length; i++ ){
+        if(coinsNeeded[i] === 'Dollar'){
+          dollar++;
+        } // end if
+        else if(coinsNeeded[i] === 'Quarter'){
+          quarter++;
+        } // end if
+        else if(coinsNeeded[i] === 'Dime'){
+          dime++;
+        } // end else if
+        else if(coinsNeeded[i] === 'Nickle'){
+          nickle++;
+    } // end else if
+    else if(coinsNeeded[i] === 'Penny'){
+          penny++;
+    } // end else if
+  } // end for loop
+    console.log(
+    'The customer needs \$' + change, 'in change. Please give them', dollar, 'dollars,', quarter, 'quarters,', dime, 'dimes,', nickle, 'nickles, and', penny, 'pennies.'
+  );
+} // end changeProvider function
+
+// run changeProvider function
+changeProvider( changeNeeded, coinValuesToUse );
