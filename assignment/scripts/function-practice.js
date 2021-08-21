@@ -81,25 +81,29 @@ let testValue1 = 'dog';
 let testValue2 = 'donkey';
 let testValue3 = 'turtle';
 let animals = ['dog', 'cat', 'turtle', 'horse'];
+let foundItem = false;
 
 console.log( animals );
 
-function findFunction(value, array){
+function findFunction( value, array ){
   for(let i=0; i<array.length; i++){
     if (array[i] === value){
-      return true + ', ' + value + ' is at index: ' + i;
+      foundItem = true;
     } //end if
-    else {
-      return false + ', it cannot be found.';
-    } // end else
-  } // end for loop  
+    } // end for loop
+  
+  if (foundItem === true){
+    foundItem = false;
+    return true + ', ' + value + ' was found at index: ' + array.indexOf( value );
+  }
+  else{
+   return false + ', ' + value + ' was not found!';
+  }
 } // end find function
 
-console.log( findFunction( testValue1, animals ));
-
-console.log('Is', testValue1, 'in the animals array?', findFunction( testValue1, animals));
-console.log('Is', testValue2, 'in the animals array?', findFunction( testValue2, animals));
-console.log('Is', testValue3, 'in the animals array?', findFunction( testValue3, animals));
+console.log('Is', testValue1, 'in the animals array?', findFunction( testValue1, animals ));
+console.log('Is', testValue2, 'in the animals array?', findFunction( testValue2, animals ));
+console.log('Is', testValue3, 'in the animals array?', findFunction( testValue3, animals ));
 
 // ----------------------
 // Stretch Goals
