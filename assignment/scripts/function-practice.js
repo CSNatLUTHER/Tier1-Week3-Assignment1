@@ -176,9 +176,9 @@ numberMover( mixNumberArray, positiveNumberArray);
 // Here 46 is the amount. and 25, 10, 5, 2, 1 are coins. 
 // Output : 25, 10, 10, 1
 
-let changeNeeded = 2; // prompt('how much change is needed? \(ex. 1.89 or 0.75\)');
+let changeNeeded = prompt('how much change is needed? \(ex. 1.89 or 0.75\)');
 let remainingChange = changeNeeded;
-let coinValuesToUse = [1,.25,.10,.05,.01];
+let coinValuesToUse = [1, .25, .1, .05, .01];
 let coinsToUse = ['Dollar', 'Quarter', 'Dime', 'Nickle', 'Penny' ];
 let coinsNeeded = [];
 let dollar = 0;
@@ -187,32 +187,51 @@ let dime = 0;
 let nickle = 0;
 let penny = 0;
 
+
+function changeCheck(){
+  while (changeNeeded > 5 || changeNeeded < .01 ){
+    alert( 'This function only supports positive values less than $5.00 Please try again.');
+    let tryAgain = prompt('how much change is needed? \(ex. 1.89 or 0.75\)');
+    changeNeeded = tryAgain;
+    remainingChange = tryAgain;
+  }
+}
+
+function roundUpChange(){
+    Math.round((remainingChange * 1000)/1000);
+}
+
+
+changeCheck();
+
 function changeProvider (change, coins){
-  // while (change > 5){
-  //   alert( 'This function only supports change values less than $5.00 Please try again.');
-  //   changeNeeded = prompt('how much change is needed? \(ex. 1.89 or 0.75\)');
-  // }
-  while( remainingChange > 0 ){
+  changeCheck();
+  roundUpChange();
+    while( remainingChange > .01 ){
     if( remainingChange >= 1 ){
       remainingChange -= coins[0];
       coinsNeeded.push(coinsToUse[0]);
     } // end if
-    // else if( remainingChange < 1 && remainingChange >= .25 ){
-    //   remainingChange -= coins[1];
-    //   coinsNeeded.push(coinsToUse[1]);
-    // } // end else if
+    else if( remainingChange < 1 && remainingChange >= .25 ){
+      remainingChange -= coins[1];
+      coinsNeeded.push(coinsToUse[1]);
+    } // end else if
     else if( remainingChange < .25 && remainingChange >= .1 ){
       remainingChange -= coins[2];
       coinsNeeded.push(coinsToUse[2]);
     } // end else if
-    // else if( remainingChange < .1 && remainingChange >= .05 ){
-    //   remainingChange -= coins[3];
-    //   coinsNeeded.push(coinsToUse[3]);
-    // } // end else if
-    // else {
-    //   remainingChange -= coins[4];
-    //   coinsNeeded.push(coinsToUse[4]);
-    // } // end else
+    else if( remainingChange < .1 && remainingChange >= .05 ){
+      remainingChange -= coins[3];
+      coinsNeeded.push(coinsToUse[3]);
+    } // end else if
+    else if(remainingChange < .05 && remainingChange >= .01 ){
+      remainingChange -= coins[4];
+      coinsNeeded.push(coinsToUse[4]);
+    } // end else
+    else{
+      alert("Value found outside normal currency demoninations. Change may be innacurate.");
+      break
+    }
   } // end while loop
   for( let i=0; i<coinsNeeded.length; i++ ){
         if(coinsNeeded[i] === 'Dollar'){
@@ -231,9 +250,11 @@ function changeProvider (change, coins){
           penny++;
     } // end else if
   } // end for loop
-    console.log(
-    'The customer needs \$' + change, 'in change. Please give them', dollar, 'dollars,', quarter, 'quarters,', dime, 'dimes,', nickle, 'nickles, and', penny, 'pennies.'
+  let customerNeed  = ['\$', change, ': Please give them', dollar, 'dollars,', quarter, 'quarters,', dime, 'dimes,', nickle, 'nickles, and', penny, 'pennies.']
+  console.log(
+    'The customer needs \$' + change, 'in change.', customerNeed.join(' ')
   );
+  alert(customerNeed.join(' '));
 } // end changeProvider function
 
 // run changeProvider function
