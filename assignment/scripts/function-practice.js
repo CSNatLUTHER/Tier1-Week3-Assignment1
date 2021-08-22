@@ -171,10 +171,10 @@ numberMover( mixNumberArray, positiveNumberArray);
 //     CodeWars(https://www.codewars.com/). Then describe it 
 //     here in a comment, write the function, and test it!
 //Problem on online challenge:
-// Write a JavaScript function to convert an amount to coins. Go to the editor
-// Sample function : amountTocoins(46, [25, 10, 5, 2, 1])
-// Here 46 is the amount. and 25, 10, 5, 2, 1 are coins. 
-// Output : 25, 10, 10, 1
+/* Write a JavaScript function to convert an amount to coins. Go to the editor
+sample function : amountTocoins(46, [25, 10, 5, 2, 1])
+Here 46 is the amount. and 25, 10, 5, 2, 1 are coins. 
+Output : 25, 10, 10, 1 */
 
 let changeNeeded = prompt('how much change is needed? \(ex. 1.89 or 0.75\)');
 let remainingChange = changeNeeded;
@@ -208,7 +208,7 @@ changeCheck();
 function changeProvider (change, coins){
   changeCheck();
   //roundChange();
-  while( remainingChange > 0 ){
+  while( remainingChange != 0 ){1.
     if( remainingChange >= 1 ){
       remainingChange -= coins[0];
       coinsNeeded.push(coinsToUse[0]);
