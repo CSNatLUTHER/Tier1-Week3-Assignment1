@@ -197,17 +197,18 @@ function changeCheck(){
   }
 }
 
-function roundUpChange(){
-    Math.round((remainingChange * 1000)/1000);
-}
+// function roundChange(){
+//     Math.round((remainingChange * 1000)/1000);
+//     Math.round((changeNeeded * 1000)/1000);
+// }
 
 
 changeCheck();
 
 function changeProvider (change, coins){
   changeCheck();
-  roundUpChange();
-    while( remainingChange > .01 ){
+  //roundChange();
+  while( remainingChange > 0 ){
     if( remainingChange >= 1 ){
       remainingChange -= coins[0];
       coinsNeeded.push(coinsToUse[0]);
@@ -229,7 +230,7 @@ function changeProvider (change, coins){
       coinsNeeded.push(coinsToUse[4]);
     } // end else
     else{
-      alert("Value found outside normal currency demoninations. Change may be innacurate.");
+      //alert("Value found outside normal currency demoninations. Change may be innacurate.");
       break
     }
   } // end while loop
@@ -245,10 +246,10 @@ function changeProvider (change, coins){
         } // end else if
         else if(coinsNeeded[i] === 'Nickle'){
           nickle++;
-    } // end else if
-    else if(coinsNeeded[i] === 'Penny'){
-          penny++;
-    } // end else if
+        } // end else if
+        else if(coinsNeeded[i] === 'Penny'){
+              penny++;
+        } // end else if
   } // end for loop
   let customerNeed  = ['\$', change, ': Please give them', dollar, 'dollars,', quarter, 'quarters,', dime, 'dimes,', nickle, 'nickles, and', penny, 'pennies.']
   console.log(
