@@ -176,7 +176,7 @@ sample function : amountTocoins(46, [25, 10, 5, 2, 1])
 Here 46 is the amount. and 25, 10, 5, 2, 1 are coins. 
 Output : 25, 10, 10, 1 */
 
-let changeNeeded = prompt('how much change is needed? \(ex. 1.89 or 0.75\)');
+let changeNeeded = Number(prompt('how much change is needed? \(ex. 1.89 or 0.75\)')).toFixed( 2 );
 let remainingChange = changeNeeded;
 let coinValuesToUse = [1, .25, .1, .05, .01];
 let coinsToUse = ['Dollar', 'Quarter', 'Dime', 'Nickle', 'Penny' ];
@@ -208,25 +208,25 @@ changeCheck();
 function changeProvider (change, coins){
   changeCheck();
   //roundChange();
-  while( remainingChange != 0 ){1.
+  while( remainingChange != 0 ){
     if( remainingChange >= 1 ){
-      remainingChange -= coins[0];
+      remainingChange = ( remainingChange - coins[0] ).toFixed( 2 );
       coinsNeeded.push(coinsToUse[0]);
     } // end if
     else if( remainingChange < 1 && remainingChange >= .25 ){
-      remainingChange -= coins[1];
+      remainingChange = ( remainingChange - coins[1] ).toFixed( 2 );
       coinsNeeded.push(coinsToUse[1]);
     } // end else if
     else if( remainingChange < .25 && remainingChange >= .1 ){
-      remainingChange -= coins[2];
+      remainingChange = ( remainingChange - coins[2] ).toFixed( 2 );
       coinsNeeded.push(coinsToUse[2]);
     } // end else if
     else if( remainingChange < .1 && remainingChange >= .05 ){
-      remainingChange -= coins[3];
+      remainingChange = ( remainingChange - coins[3] ).toFixed( 2 );
       coinsNeeded.push(coinsToUse[3]);
     } // end else if
-    else if(remainingChange < .05 && remainingChange >= .01 ){
-      remainingChange -= coins[4];
+    else if(remainingChange < .05 && remainingChange >= .00 ){
+      remainingChange = ( remainingChange - coins[4] ).toFixed( 2 );
       coinsNeeded.push(coinsToUse[4]);
     } // end else
     else{
@@ -251,7 +251,7 @@ function changeProvider (change, coins){
               penny++;
         } // end else if
   } // end for loop
-  let customerNeed  = ['\$', change, ': Please give them', dollar, 'dollars,', quarter, 'quarters,', dime, 'dimes,', nickle, 'nickles, and', penny, 'pennies.']
+  let customerNeed  = ['Change neded is: \$', change, ': Please give them', dollar, 'dollars,', quarter, 'quarters,', dime, 'dimes,', nickle, 'nickles, and', penny, 'pennies.']
   console.log(
     'The customer needs \$' + change, 'in change.', customerNeed.join(' ')
   );
